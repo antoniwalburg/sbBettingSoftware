@@ -1,0 +1,53 @@
+   // console.log(groupBy(obj,"sportName"))
+        
+        //const apiUrl = ("https://api.iforbet.pl/rest/market/categories");
+        
+        //async function getData() {
+            
+            //const response = await fetch(apiUrl);
+            //const data = await response.json();
+            //data.data.sort(function(a, b) {
+                //return a.sportId - b.sportId;
+            //})
+            //console.log(data.data)
+            //sportsData = JSON.stringify(data.data)
+            //document.write(sportsData)
+            //sportsDataValue = data.data.filter((deep) => {return (deep["categoryName"])})
+            //sportsDataValue.forEach(element => {
+                //document.write(element["categoryName"]
+                 //+ " sportId: "
+                 //+ element["sportId"]
+                 //+ ", level: "
+                 //+ element["level"] 
+                 //+ "<br>")
+            //});
+            
+
+
+
+            //sports = data.data.filter((deep) => {return (deep["sportName"])})
+            //sports.forEach(element => {
+                //document.write(element["sportName"] + "<br>");
+            //});
+
+            //pilka = data.data.filter((deep) => {return (deep["sportName"] == "Piłka nożna")})
+            //document.write("<br>")
+            //document.write("END SPORTNAME" + "<br>")
+            //pilka.forEach(element => {
+                //if(element["level"] != 1) {
+                    //document.write(element["categoryName"] + " " + element["level"] + "<br>")
+                //}
+            //});
+        for (let i of keysSortedData) {
+            let item = document.createElement("li");
+            item.innerHTML = i;
+            list.appendChild(item)
+
+                    // let temp = (cateogryLevel == levelTwo) ? categoryNameLevel2.forEach(element => {
+                    //     const { categoryName: levelTwoTable } = element;
+                    //     console.log(levelTwoTable)
+                    // }) : categoryNameLevel3.forEach(element => {
+                    //     const { categoryName: levelThreeTable } = element;
+                    //     console.log(levelThreeTable)
+                    // })
+                
