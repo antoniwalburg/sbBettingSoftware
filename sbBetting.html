@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iforbetRestApi</title>
+</head>
+<body>
+
+    <div id="sportsDiv"></div>
+
+    <script>
+
+        const groupBy = (items, key) => items.reduce(
+        (result, item) => ({
+        ...result,
+        [item[key]]: [
+        ...(result[item[key]] || []),
+        item,],}), {})
+        
+        const iforbetApiUrl = ("http://api.iforbet.pl/rest/market/categories");
+        let obj;
+        fetch(iforbetApiUrl)
+        .then(res => res.json())
+        .then(data => obj = data)
+        
+        //error handle
+        .then(function() {
+            console.log("status -> ok");
+        })
+        .catch(function() {
+            console.log("error");
+        })
+        
+        .then(() => {
+        const {data} = obj
+        sortedData = groupBy(data,"sportName")
+        keysSortedData = Object.keys(sortedData)
+
+        let categoryNameLevel1 = data.filter(function(e) {
+            return e.level == 1;
+        });
+        let list = document.createElement("ul");
+        categoryNameLevel1.forEach(element => {
+            const {categoryName, sportId} = element;
+            let item = document.createElement("li");
+            item.innerText = categoryName;
+            //add data atribiute = sportId
+            item.dataset.sportId = sportId
+            list.appendChild(item);
+            
+        });
+        document.getElementById("sportsDiv").appendChild(list);
+
+        let categoryNameLevel2 = data.filter(function(e) {
+            return e.level == 2;
+        });
+
+        let categoryNameLevel3 = data.filter(function(e) {
+            return e.level == 3;
+        });
+
+        function sortCategoryNamesByLevel(cateogryLevel) {
+            if(cateogryLevel == 1) {
+                categoryNameLevel1.forEach(element => {
+                    const {categoryName} = element;
+                    console.log(categoryName)
+                })
+            }
+            if(cateogryLevel == 2) {
+                categoryNameLevel2.forEach(element => {
+                    const {categoryName} = element;
+                    console.log(categoryName)
+                })
+            }
+            if(cateogryLevel == 3) {
+                categoryNameLevel3.forEach(element => {
+                    const {categoryName} = element;
+                    console.log(categoryName)
+                })
+            }
+        }
+        sortCategoryNamesByLevel(3)
+    
+    })
+
+    </script>
+    
+</body>
+</html>
