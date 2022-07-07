@@ -1,0 +1,82 @@
+body {
+    font-family: Helvetica, sans-serif;
+    background: #23242a;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: whitesmoke;
+}
+
+.dropdown_button {
+    background-color: #181818;
+    color: #33ff33;
+    font-weight: bolder;
+    text-align: center;
+    padding: 16px;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: 7px solid black;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 30px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 30px;
+    -moz-border-radius-bottomleft: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 0px;
+}
+.dropdown_button:hover{
+    background-color: #33ff33;
+    color: #181818;
+    transition: 0.3s;
+}
+.courses {
+    display: none;
+    position: absolute;
+    background-color: #101010;
+    z-index: 1;
+    border: 8px solid black;
+    margin-top: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 30px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 30px;
+    -moz-border-radius-bottomleft: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+}
+
+.courses li {
+    color: whitesmoke;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    list-style: none;
+    background-color:#181818;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: 0.335em solid black;
+    border-radius: 3px;
+}
+
+.courses li a {
+    text-decoration: none;
+    color: whitesmoke;
+    display: block;
+    padding: 10px;
+}
+
+.courses li:hover {
+    background-color:#101010;
+    transition: 0.3s;
+    color: greenyellow;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+
+}
