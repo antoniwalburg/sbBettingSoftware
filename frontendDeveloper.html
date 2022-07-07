@@ -6,13 +6,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iforbetRestApi</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <div class="main">
+        <div class="dropdown_list">
+            <div class="dropdown_button"
+                onclick="show_list()">
+                Sports
+            </div>
+ 
+            <div id="sportsDiv" class="courses">
+ 
+            </div>
+        </div>
+    </div>
 
-    <div id="sportsDiv"></div>
-
-    <script>
+    <script defer>
+        function show_list() {
+            var courses = document.getElementById("sportsDiv");
+ 
+            if (courses.style.display == "block") {
+                courses.style.display = "none";
+            } else {
+                courses.style.display = "block";
+            }
+        }   
 
         const groupBy = (items, key) => items.reduce(
             (result, item) => ({
@@ -40,45 +60,101 @@
                 const { data } = obj
                 sortedData = groupBy(data, "sportName")
                 keysSortedData = Object.keys(sortedData)
-
                 function sortCategoryNamesByLevel(cateogryLevel) {
                     return data.filter(function (e) {
-                        return e.level == cateogryLevel;
+                        return e.level == cateogryLevel && (!e.sportName.includes("Esport"))
                     });
                 }
-                let categoryNameLevel1 = sortCategoryNamesByLevel(1);
-                let categoryNameLevel2 = sortCategoryNamesByLevel(2);
-                let categoryNameLevel3 = sortCategoryNamesByLevel(3);
+                function createEsports(name) {
+                    let esport = document.createElement("ul");
+                    let li = document.createElement("li");
+                    esport.appendChild(li);
+                    li.innerText = name;
+                    li.setAttribute('id','esportsLink');
+                    document.getElementById("sportsDiv").appendChild(esport);
+            }
+            createEsports("Esports");
+
+                function getEsports(name, categoryLevel) {
+                    return data.filter(function (e) {
+                        if (e.sportName.includes(name) && e.level == categoryLevel) {
+                            return e.categoryName;
+                        }
+                    })
+                }
+                const timeout = 100;
+                setTimeout(function() {
+
+                let esportsLevel1 = getEsports("Esport", 1);
+                esportsLevel1.forEach(element => {
+                    const {categoryName, sportId} = element;
+                    let listEsports1 = document.createElement("ul");
+                    let itemEsports1 = document.createElement("li");
+                    itemEsports1.innerText = categoryName;
+                    itemEsports1.dataset.sportId = sportId
+                    listEsports1.appendChild(itemEsports1);
+                    document.getElementById("esportsLink").appendChild(listEsports1);
+                });
                 
+                let esportsLevel2 = getEsports("Esport", 2);
+                esportsLevel2.forEach(element => {
+                    const {categoryName, parentCategory, categoryId} = element;
+                    let listEsports2 = document.createElement("ul");
+                    let itemEsports2 = document.createElement("li");
+                    itemEsports2.innerText = categoryName;
+                    itemEsports2.dataset.categoryId = categoryId
+                    listEsports2.appendChild(itemEsports2);
+                    document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listEsports2);
+                });
+                
+                let esportsLevel3 = getEsports("Esport", 3);
+                esportsLevel3.forEach(element => {
+                    const { categoryName, parentCategory } = element;
+                    let listEsports3 = document.createElement("ul");
+                    let itemEsports3 = document.createElement("li");
+                    itemEsports3.innerText = categoryName;
+                    listEsports3.appendChild(itemEsports3);
+                    document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listEsports3);
+                });
+            },timeout)
+            setTimeout(function() {
                 let listLevelOne = document.createElement("ul");
+                let categoryNameLevel1 = sortCategoryNamesByLevel(1);
                 categoryNameLevel1.forEach(element => {
-                    const { categoryName, sportId } = element;
+                    let divone = document.createElement("div");
+                    const { categoryName, sportId, sportName } = element;
+                    divone.dataset.sportId = sportId;
                     let itemLevelOne = document.createElement("li");
                     itemLevelOne.innerText = categoryName;
                     itemLevelOne.dataset.sportId = sportId
-                    listLevelOne.appendChild(itemLevelOne);
+                    divone.appendChild(itemLevelOne);
+                    listLevelOne.appendChild(divone)
                 });
                 document.getElementById("sportsDiv").appendChild(listLevelOne);
-
-                categoryNameLevel2.forEach(element => {
-                    const { categoryName, parentCategory, sportId } = element;
+                let categoryNameLevel2 = sortCategoryNamesByLevel(2);
+                    categoryNameLevel2.forEach(element => {
+                    const { categoryName, parentCategory, categoryId } = element;
                     let listLevelTwo = document.createElement("ul");
+                    let divtwo = document.createElement("div");
+                    divtwo.dataset.categoryId = categoryId;
                     let itemLevelTwo = document.createElement("li");
                     itemLevelTwo.innerText = categoryName;
-                    itemLevelTwo.dataset.sportId = sportId
-                    listLevelTwo.appendChild(itemLevelTwo);
+                    itemLevelTwo.dataset.categoryId = categoryId
+                    divtwo.appendChild(itemLevelTwo);
+                    listLevelTwo.appendChild(divtwo);
                     document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelTwo)
                 });
+                let categoryNameLevel3 = sortCategoryNamesByLevel(3);
                 categoryNameLevel3.forEach(element => {
                     const { categoryName, parentCategory } = element;
                     let listLevelThree = document.createElement("ul");
                     let itemLevelThree = document.createElement("li");
                     itemLevelThree.innerText = categoryName;
                     listLevelThree.appendChild(itemLevelThree);
-                    document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelThree)
+                    document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
                 });
-
-            })
+            },timeout*2)
+        })
 
     </script>
 
