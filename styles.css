@@ -88,7 +88,7 @@ body {
     background-color: #101010;
 }
 
-.courses2 li {
+.courses2 div {
     color: whitesmoke;
     text-decoration: none;
     display: block;
@@ -99,13 +99,12 @@ body {
     transition: 0.3s;
 }
 
-.courses2 li a {
+.courses2 div a {
     text-decoration: none;
     color: whitesmoke;
-    padding: 10px;
 }
 
-.courses2 li:hover {
+.courses2 div:hover {
     background-color:#101010;
     transition: 0.3s;
     color: greenyellow;
