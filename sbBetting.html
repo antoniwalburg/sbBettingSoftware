@@ -34,13 +34,15 @@
             }
         }
         function show_level2() {
-            let courses2 = document.getElementById("dropdown-menu");
+            let courses2 = document.getElementById("1")
             if (courses2.style.display == "block") {
                 courses2.style.display = "none";
-            } else {
+            } 
+            else {
                 courses2.style.display = "block";
             }
         }
+
 
         const groupBy = (items, key) => items.reduce(
             (result, item) => ({
@@ -144,26 +146,26 @@
                 document.getElementById("sportsDiv").appendChild(listLevelOne);
                 let categoryNameLevel2 = sortCategoryNamesByLevel(2);
                     categoryNameLevel2.forEach(element => {
-                    const { categoryName, parentCategory, categoryId } = element;
+                    const { categoryName, parentCategory, categoryId, sportId } = element;
                     let listLevelTwo = document.createElement("ul");
-                    listLevelTwo.setAttribute('id','dropdown-menu')
+                    listLevelTwo.dataset.sportId = sportId;
+                    listLevelTwo.setAttribute('id', sportId)
                     listLevelTwo.setAttribute('class','courses2')
-                    listLevelTwo.setAttribute('style','display: none;')
                     let itemLevelTwo = document.createElement("li");
                     itemLevelTwo.innerText = categoryName;
                     itemLevelTwo.dataset.categoryId = categoryId
                     listLevelTwo.appendChild(itemLevelTwo);
                     document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelTwo)
                 });
-                let categoryNameLevel3 = sortCategoryNamesByLevel(3);
-                categoryNameLevel3.forEach(element => {
-                    const { categoryName, parentCategory } = element;
-                    let listLevelThree = document.createElement("ul");
-                    let itemLevelThree = document.createElement("li");
-                    itemLevelThree.innerText = categoryName;
-                    listLevelThree.appendChild(itemLevelThree);
-                    document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
-                });
+                // let categoryNameLevel3 = sortCategoryNamesByLevel(3);
+                // categoryNameLevel3.forEach(element => {
+                //     const { categoryName, parentCategory } = element;
+                //     let listLevelThree = document.createElement("ul");
+                //     let itemLevelThree = document.createElement("li");
+                //     itemLevelThree.innerText = categoryName;
+                //     listLevelThree.appendChild(itemLevelThree);
+                //     document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
+                // });
             },timeout*2)
         })
 
