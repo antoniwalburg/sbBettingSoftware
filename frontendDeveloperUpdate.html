@@ -33,14 +33,6 @@
                 courses.style.display = "block";
             }
         }
-        function show_level2() {
-            let courses2 = document.getElementById("dropdown-menu");
-            if (courses2.style.display == "block") {
-                courses2.style.display = "none";
-            } else {
-                courses2.style.display = "block";
-            }
-        }
         const groupBy = (items, key) => items.reduce(
             (result, item) => ({
                 ...result,
@@ -89,7 +81,8 @@
                         }
                     })
                 }
-
+                const timeout = 100;
+                setTimeout(function() {
 
                 // let esportsLevel1 = getEsports("Esport", 1);
                 // esportsLevel1.forEach(element => {
@@ -122,16 +115,17 @@
                 //     listEsports3.appendChild(itemEsports3);
                 //     document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listEsports3);
                 // });
+            },timeout)
+            setTimeout(function() {
                 let listLevelOne = document.createElement("ul");
                 listLevelOne.setAttribute('class','navbar-sports')
                 let categoryNameLevel1 = sortCategoryNamesByLevel(1);
                 categoryNameLevel1.forEach(element => {
                     let divone = document.createElement("div");
-                    divone.setAttribute('class','sport-container');
                     const { categoryName, sportId, sportName } = element;
                     divone.dataset.sportId = sportId;
                     let itemLevelOne = document.createElement("li");
-                    itemLevelOne.setAttribute('onclick','show_level2()');
+                    itemLevelOne.setAttribute('class','dropdown-toggle');
                     itemLevelOne.innerText = categoryName;
                     itemLevelOne.dataset.sportId = sportId
                     divone.appendChild(itemLevelOne);
@@ -139,17 +133,27 @@
                 });
                 document.getElementById("sportsDiv").appendChild(listLevelOne);
                 let categoryNameLevel2 = sortCategoryNamesByLevel(2);
-                let divtwo = document.createElement("div")
-                divtwo.setAttribute('id','dropdown-menu')
-                    divtwo.setAttribute('class','courses2')
                     categoryNameLevel2.forEach(element => {
-                    const { categoryName, parentCategory, categoryId } = element;
-                    let listLevelTwo = document.createElement("ul"); 
+                    const { categoryName, parentCategory, categoryId, sportId } = element;
+                    let listLevelTwo = document.createElement("ul");
+                    listLevelTwo.dataset.sportId = sportId;
+                    listLevelTwo.setAttribute('id', sportId)
+                    const event = document.querySelector(`[data-sport-id='${sportId}']`)
+                    listLevelTwo.setAttribute('class','courses2')
+                    event.addEventListener('click', (parametr)=>{
+                        let courses2 = document.querySelectorAll(`[data-sport-id='${sportId}']`);
+                        for(let i = 2; i < courses2.length; i++){
+                            if(courses2[i].style.display == "block"){
+                                courses2[i].style.display = "none"
+                            }else {
+                                    courses2[i].style.display = "block";
+                            }
+                        }
+                    })
                     let itemLevelTwo = document.createElement("li");
                     itemLevelTwo.innerText = categoryName;
-                    itemLevelTwo.dataset.categoryId = categoryId;
-                    divtwo.appendChild(itemLevelTwo);
-                    listLevelTwo.appendChild(divtwo);
+                    itemLevelTwo.dataset.categoryId = categoryId
+                    listLevelTwo.appendChild(itemLevelTwo);
                     document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelTwo)
                 });
                 // let categoryNameLevel3 = sortCategoryNamesByLevel(3);
@@ -161,6 +165,7 @@
                 //     listLevelThree.appendChild(itemLevelThree);
                 //     document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
                 // });
+            },timeout*2)
         })
 
     </script>
