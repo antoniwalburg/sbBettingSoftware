@@ -33,6 +33,10 @@
                 courses.style.display = "block";
             }
         }
+        function hide() {
+            item.style.display = "none";
+        }
+
         const groupBy = (items, key) => items.reduce(
             (result, item) => ({
                 ...result,
@@ -131,6 +135,7 @@
                     divone.appendChild(itemLevelOne);
                     listLevelOne.appendChild(divone)
                 });
+    
                 document.getElementById("sportsDiv").appendChild(listLevelOne);
                 let categoryNameLevel2 = sortCategoryNamesByLevel(2);
                     categoryNameLevel2.forEach(element => {
@@ -138,17 +143,26 @@
                     let listLevelTwo = document.createElement("ul");
                     listLevelTwo.dataset.sportId = sportId;
                     listLevelTwo.setAttribute('id', sportId)
-                    const event = document.querySelector(`[data-sport-id='${sportId}']`)
                     listLevelTwo.setAttribute('class','courses2')
-                    event.addEventListener('click', (parametr)=>{
-                        let courses2 = document.querySelectorAll(`[data-sport-id='${sportId}']`);
-                        for(let i = 2; i < courses2.length; i++){
-                            if(courses2[i].style.display == "block"){
-                                courses2[i].style.display = "none"
-                            }else {
-                                    courses2[i].style.display = "block";
+                    const eventShow = document.querySelector(`[data-sport-id='${sportId}']`)
+                    eventShow.addEventListener('click', (showParametr)=>{
+                        console.log(eventShow)
+                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                        for(let i = 0; i < courses2.length; i++){
+                            courses2[i].style.display = "block";
+                            if(courses2[i].style.display == "none"){
+                                courses2[i].style.display = "block";
                             }
                         }
+                        const eventHide = document.querySelector(`[data-sport-id='${sportId}']`)
+                        eventHide.addEventListener('click', (hideParamentr)=>{
+                        console.log(eventHide)
+                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                        for (let i = 0; i < courses2.length; i++){
+                            courses2[i].style.display = "none";
+                            courses2[i].style.display == "block";
+                        }
+                        })
                     })
                     let itemLevelTwo = document.createElement("li");
                     itemLevelTwo.innerText = categoryName;
