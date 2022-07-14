@@ -53,6 +53,7 @@ body {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 10px;
+    scroll-behavior: smooth;
 }
 
 .courses li {
@@ -70,7 +71,6 @@ body {
 
 .courses li a {
     text-decoration: none;
-    color: red;
     display: block;
     padding: 10px;
 }
@@ -82,13 +82,16 @@ body {
     font-family: 'Russo One', sans-serif;
 
 }
+.courses:hover {
+    background-color: #101010;
+}
 .courses2 {
     display: none;
     position: relative;
     background-color: #101010;
 }
 
-.courses2 div {
+.courses2 li {
     color: whitesmoke;
     text-decoration: none;
     display: block;
@@ -99,15 +102,51 @@ body {
     transition: 0.3s;
 }
 
-.courses2 div a {
+.courses2 li a {
     text-decoration: none;
     color: whitesmoke;
 }
+.courses2 ul{
+    background-color: #181818;
+}
 
-.courses2 div:hover {
+.courses2 li:hover {
     background-color:#101010;
     transition: 0.3s;
-    color: greenyellow;
+    color: orange;
     font-family: 'Russo One', sans-serif;
 
 }
+.courses2 ul:hover {
+    background-color: #101010;
+}
+.courses3 {
+    display: none;
+    position: relative;
+    background-color: #181818;
+    margin: 10px;
+    width: 90%;
+}
+
+
+.courses3 li {
+    text-decoration: none;
+    display: block;
+    list-style: none;
+    background-color:#181818;
+    font-family: 'Russo One', sans-serif;
+    transition: 0.3s;
+}
+
+.courses3 li a {
+    text-decoration: none;
+}
+
+.courses3 li:hover {
+    background-color:#101010;
+    transition: 0.3s;
+    color: royalblue;
+    font-family: 'Russo One', sans-serif;
+}
+
+
