@@ -33,10 +33,6 @@
                 courses.style.display = "block";
             }
         }
-        function hide() {
-            item.style.display = "none";
-        }
-
         const groupBy = (items, key) => items.reduce(
             (result, item) => ({
                 ...result,
@@ -88,39 +84,10 @@
                 const timeout = 100;
                 setTimeout(function() {
 
-                // let esportsLevel1 = getEsports("Esport", 1);
-                // esportsLevel1.forEach(element => {
-                //     const {categoryName, sportId} = element;
-                //     let listEsports1 = document.createElement("ul");
-                //     let itemEsports1 = document.createElement("li");
-                //     itemEsports1.innerText = categoryName;
-                //     itemEsports1.dataset.sportId = sportId
-                //     listEsports1.appendChild(itemEsports1);
-                //     document.getElementById("esportsLink").appendChild(listEsports1);
-                // });
-                
-                // let esportsLevel2 = getEsports("Esport", 2);
-                // esportsLevel2.forEach(element => {
-                //     const {categoryName, parentCategory, categoryId} = element;
-                //     let listEsports2 = document.createElement("ul");
-                //     let itemEsports2 = document.createElement("li");
-                //     itemEsports2.innerText = categoryName;
-                //     itemEsports2.dataset.categoryId = categoryId
-                //     listEsports2.appendChild(itemEsports2);
-                //     document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listEsports2);
-                // });
-                
-                // let esportsLevel3 = getEsports("Esport", 3);
-                // esportsLevel3.forEach(element => {
-                //     const { categoryName, parentCategory } = element;
-                //     let listEsports3 = document.createElement("ul");
-                //     let itemEsports3 = document.createElement("li");
-                //     itemEsports3.innerText = categoryName;
-                //     listEsports3.appendChild(itemEsports3);
-                //     document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listEsports3);
-                // });
             },timeout)
+
             setTimeout(function() {
+                //LEVEL_1
                 let listLevelOne = document.createElement("ul");
                 listLevelOne.setAttribute('class','navbar-sports')
                 let categoryNameLevel1 = sortCategoryNamesByLevel(1);
@@ -129,56 +96,73 @@
                     const { categoryName, sportId, sportName } = element;
                     divone.dataset.sportId = sportId;
                     let itemLevelOne = document.createElement("li");
-                    itemLevelOne.setAttribute('class','dropdown-toggle');
-                    itemLevelOne.innerText = categoryName;
+                    itemLevelOne.innerText = categoryName + " »";
                     itemLevelOne.dataset.sportId = sportId
                     divone.appendChild(itemLevelOne);
                     listLevelOne.appendChild(divone)
+
                 });
-    
+                //LEVEL_2
                 document.getElementById("sportsDiv").appendChild(listLevelOne);
                 let categoryNameLevel2 = sortCategoryNamesByLevel(2);
                     categoryNameLevel2.forEach(element => {
-                    const { categoryName, parentCategory, categoryId, sportId } = element;
+                    
+                    const { categoryName, parentCategory, categoryId, sportId} = element;
                     let listLevelTwo = document.createElement("ul");
                     listLevelTwo.dataset.sportId = sportId;
-                    listLevelTwo.setAttribute('id', sportId)
+                    listLevelTwo.setAttribute('id', categoryId)
+                    const event = document.querySelector(`[data-sport-id='${sportId}']`)
                     listLevelTwo.setAttribute('class','courses2')
-                    const eventShow = document.querySelector(`[data-sport-id='${sportId}']`)
-                    eventShow.addEventListener('click', (showParametr)=>{
-                        console.log(eventShow)
-                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
-                        for(let i = 0; i < courses2.length; i++){
-                            courses2[i].style.display = "block";
-                            if(courses2[i].style.display == "none"){
-                                courses2[i].style.display = "block";
-                            }
-                        }
-                        const eventHide = document.querySelector(`[data-sport-id='${sportId}']`)
-                        eventHide.addEventListener('click', (hideParamentr)=>{
-                        console.log(eventHide)
-                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
-                        for (let i = 0; i < courses2.length; i++){
-                            courses2[i].style.display = "none";
-                            courses2[i].style.display == "block";
-                        }
-                        })
-                    })
+                    
                     let itemLevelTwo = document.createElement("li");
-                    itemLevelTwo.innerText = categoryName;
+                    itemLevelTwo.innerText = categoryName + " »";
                     itemLevelTwo.dataset.categoryId = categoryId
                     listLevelTwo.appendChild(itemLevelTwo);
                     document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelTwo)
                 });
-                // let categoryNameLevel3 = sortCategoryNamesByLevel(3);
-                // categoryNameLevel3.forEach(element => {
-                //     const { categoryName, parentCategory } = element;
-                //     let listLevelThree = document.createElement("ul");
-                //     let itemLevelThree = document.createElement("li");
-                //     itemLevelThree.innerText = categoryName;
-                //     listLevelThree.appendChild(itemLevelThree);
-                //     document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
-                // });
+
+                categoryNameLevel1 = sortCategoryNamesByLevel(1);
+                categoryNameLevel1.forEach(element => {
+                    const { categoryName, parentCategory, categoryId, sportId } = element;
+                    const event = document.querySelector(`div[data-sport-id='${sportId}']`)
+                    event.addEventListener('click', (parametr)=>{
+                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                        courses2.forEach(function(item, index, arr){
+                            let checkStyleValue = item.style.display == "block" 
+                            ? item.style.display = "none" : item.style.display = "block";
+                        });
+                    })
+                });
+                //LEVEL_3
+                let categoryNameLevel3 = sortCategoryNamesByLevel(3);
+                categoryNameLevel3.forEach(element => { 
+
+                const { categoryName, parentCategory, categoryId, sportId } = element
+                let listLevelThree = document.createElement("ul");
+                listLevelThree.dataset.sportId = sportId;
+                listLevelThree.setAttribute('id', categoryId);
+                const event2 = document.querySelector(`[data-sport-id='${categoryId}']`)
+                listLevelThree.setAttribute('class','courses3');         
+
+                let itemLevelThree = document.createElement("li");
+                itemLevelThree.innerText = categoryName;
+                itemLevelThree.dataset.categoryId = categoryId
+                listLevelThree.appendChild(itemLevelThree);
+                document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
+                });
+                
+                categoryNameLevel2 = sortCategoryNamesByLevel(2);
+                categoryNameLevel2.forEach(element => {
+                    const { categoryName, parentCategory, categoryId, sportId } = element;
+                    const event2 = document.querySelector(`div[data-sport-id='${sportId}']`)
+                    event2.addEventListener('click', (parametr)=>{
+                        let courses3 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                        courses3.forEach(function(item, index, arr){
+                            let checkStyleValue = item.style.display == "block" 
+                            ? item.style.display = "none" : item.style.display = "block";
+                        });
+                    })
+                });
             },timeout*2)
         })
 
