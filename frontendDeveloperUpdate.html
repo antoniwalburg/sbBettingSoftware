@@ -23,7 +23,9 @@
         </div>
     </div>
 
-    <script defer>
+    <script async defer>
+    //write your code here
+
         function show_list() {
             let courses = document.getElementById("sportsDiv");
  
@@ -32,6 +34,9 @@
             } else {
                 courses.style.display = "block";
             }
+        }
+        function show_level3() {
+            let courses3 = document.getElementById("")
         }
         const groupBy = (items, key) => items.reduce(
             (result, item) => ({
@@ -107,9 +112,10 @@
                 let categoryNameLevel2 = sortCategoryNamesByLevel(2);
                     categoryNameLevel2.forEach(element => {
                     
-                    const { categoryName, parentCategory, categoryId, sportId} = element;
+                    const { categoryName, parentCategory, categoryId, sportId, level} = element;
                     let listLevelTwo = document.createElement("ul");
                     listLevelTwo.dataset.sportId = sportId;
+                    listLevelTwo.dataset.level = level;
                     listLevelTwo.setAttribute('id', categoryId)
                     const event = document.querySelector(`[data-sport-id='${sportId}']`)
                     listLevelTwo.setAttribute('class','courses2')
@@ -123,25 +129,25 @@
 
                 categoryNameLevel1 = sortCategoryNamesByLevel(1);
                 categoryNameLevel1.forEach(element => {
-                    const { categoryName, parentCategory, categoryId, sportId } = element;
+                    const { categoryName, parentCategory, categoryId, sportId, level} = element;
                     const event = document.querySelector(`div[data-sport-id='${sportId}']`)
                     event.addEventListener('click', (parametr)=>{
-                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                        let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);//[data-level='2']`);
                         courses2.forEach(function(item, index, arr){
                             let checkStyleValue = item.style.display == "block" 
-                            ? item.style.display = "none" : item.style.display = "block";
-                        });
+                            ? item.style.display = "block" : item.style.display = "block";
+                        })
                     })
                 });
                 //LEVEL_3
                 let categoryNameLevel3 = sortCategoryNamesByLevel(3);
                 categoryNameLevel3.forEach(element => { 
-
-                const { categoryName, parentCategory, categoryId, sportId } = element
+                const { categoryName, parentCategory, categoryId, sportId, level } = element
                 let listLevelThree = document.createElement("ul");
                 listLevelThree.dataset.sportId = sportId;
+                listLevelThree.dataset.level = level;
                 listLevelThree.setAttribute('id', categoryId);
-                const event2 = document.querySelector(`[data-sport-id='${categoryId}']`)
+                const event2 = document.querySelector(`[data-category-id='${parentCategory}']`)
                 listLevelThree.setAttribute('class','courses3');         
 
                 let itemLevelThree = document.createElement("li");
@@ -150,22 +156,21 @@
                 listLevelThree.appendChild(itemLevelThree);
                 document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
                 });
-                
                 categoryNameLevel2 = sortCategoryNamesByLevel(2);
                 categoryNameLevel2.forEach(element => {
                     const { categoryName, parentCategory, categoryId, sportId } = element;
-                    const event2 = document.querySelector(`div[data-sport-id='${sportId}']`)
+                    const event2 = document.querySelector(`div[data-category-id='${categoryId}']`)
                     event2.addEventListener('click', (parametr)=>{
-                        let courses3 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                        let courses3 = document.querySelectorAll(`li[data-category-id='${categoryId}']`);
                         courses3.forEach(function(item, index, arr){
                             let checkStyleValue = item.style.display == "block" 
                             ? item.style.display = "none" : item.style.display = "block";
                         });
+                    
                     })
                 });
             },timeout*2)
         })
-
     </script>
 
 </body>
