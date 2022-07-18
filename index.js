@@ -15,7 +15,7 @@ const groupBy = (items, key) => items.reduce(
             item,],
     }), {})
 
-const iforbetApiUrl = ("http://api.iforbet.pl/rest/market/categories");
+let iforbetApiUrl = ("http://api.iforbet.pl/rest/market/categories");
 let obj;
 fetch(iforbetApiUrl)
     .then(res => res.json())
@@ -29,13 +29,15 @@ fetch(iforbetApiUrl)
         console.log("error");
     })
 
-    .then(() => {
+    .then(function () {
         const { data } = obj
         sortedData = groupBy(data, "sportName")
         keysSortedData = Object.keys(sortedData)
         function sortCategoryNamesByLevel(cateogryLevel) {
+            const invalidSportId = 18;
             return data.filter(function (e) {
-                return e.level == cateogryLevel && (!e.sportName.includes("Esport"))
+                return e.level == cateogryLevel && (!e.sportName.includes("Esport")) && (e.sportId != invalidSportId)
+                && e.sportId != (invalidSportId * 2) && e.categoryName != "Outrights";
             });
         }
         function createEsports(name) {
@@ -74,18 +76,17 @@ fetch(iforbetApiUrl)
         document.getElementById("sportsDiv").appendChild(listLevelOne);
         let categoryNameLevel2 = sortCategoryNamesByLevel(2);
             categoryNameLevel2.forEach(element => {
-            
             const { categoryName, parentCategory, categoryId, sportId, level} = element;
             let listLevelTwo = document.createElement("ul");
             listLevelTwo.dataset.sportId = sportId;
             listLevelTwo.dataset.level = level;
             listLevelTwo.setAttribute('id', categoryId)
-            const event = document.querySelector(`[data-sport-id='${sportId}']`)
             listLevelTwo.setAttribute('class','courses2')
             
             let itemLevelTwo = document.createElement("li");
             itemLevelTwo.innerText = categoryName + " »";
             itemLevelTwo.dataset.categoryId = categoryId
+            itemLevelTwo.dataset.level = level;
             listLevelTwo.appendChild(itemLevelTwo);
             document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelTwo)
         });
@@ -95,7 +96,7 @@ fetch(iforbetApiUrl)
             const { categoryName, parentCategory, categoryId, sportId, level} = element;
             const event = document.querySelector(`li[data-sport-id='${sportId}']`)
             event.addEventListener('click', (parametr)=>{
-                let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}']`);
+                let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}'][data-level = '2']`);
                 courses2.forEach(function(item, index, arr){
                     let checkStyleValue = item.style.display == "block" 
                     ? item.style.display = "none" : item.style.display = "block";
@@ -104,32 +105,36 @@ fetch(iforbetApiUrl)
         });
         //LEVEL_3
         let categoryNameLevel3 = sortCategoryNamesByLevel(3);
-        categoryNameLevel3.forEach(element => { 
+        categoryNameLevel3.forEach(element => {
+            
         const { categoryName, parentCategory, categoryId, sportId, level } = element
         let listLevelThree = document.createElement("ul");
         listLevelThree.dataset.sportId = sportId;
         listLevelThree.dataset.level = level;
+        listLevelThree.dataset.categoryId = categoryId;
+        listLevelThree.dataset.parentCategory = parentCategory;
         listLevelThree.setAttribute('id', categoryId);
-        const event2 = document.querySelector(`[data-category-id='${parentCategory}']`)
         listLevelThree.setAttribute('class','courses3');  
 
         let itemLevelThree = document.createElement("li");
         itemLevelThree.innerText = categoryName;
         itemLevelThree.dataset.categoryId = categoryId
         listLevelThree.appendChild(itemLevelThree);
-        document.querySelector(`[data-category-id='${parentCategory}'`).append(listLevelThree);
+        document.querySelector(`[data-category-id='${parentCategory}'`).appendChild(listLevelThree);
         });
         categoryNameLevel2 = sortCategoryNamesByLevel(2);
         categoryNameLevel2.forEach(element => {
-            const { categoryName, parentCategory, categoryId, sportId } = element;
-            const event2 = document.querySelector(`ul[data-category-id='${categoryId}']`)
-            event2.addEventListener('click', (parametr)=>{
-                let courses3 = document.querySelectorAll(`ul[data-category-id='${categoryId}']`);
-                courses3.forEach(function(item, index, arr){
-                    let checkStyleValue = item.style.display == "block" 
-                    ? item.style.display = "none" : item.style.display = "block";
-                });
-            
+                const { categoryName, parentCategory, categoryId, sportId } = element;
+                const event2 = document.querySelector(`ul[data-sport-id='${sportId}']`)
+                event2.addEventListener('click', (parametr)=>{
+                    console.log(event2)
+                    let courses3 = document.querySelectorAll(`ul[data-parent-category='${categoryId}'][data-level = '3']`);
+                    courses3.forEach(function(item, index, arr){
+                        let checkStyleValue = item.style.display == "block" 
+                        ? item.style.display = "none" : item.style.display = "block";
+                    });
+                
+                })
             })
-        });
 })
+//FILTER_WITH_OUT => ELEMENTS WITH-OUT PAR-CHILD
