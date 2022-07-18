@@ -80,7 +80,7 @@ fetch(iforbetApiUrl)
             let listLevelTwo = document.createElement("ul");
             listLevelTwo.dataset.sportId = sportId;
             listLevelTwo.dataset.level = level;
-            listLevelTwo.setAttribute('id', categoryId)
+            listLevelTwo.dataset.categoryId = categoryId;
             listLevelTwo.setAttribute('class','courses2')
             
             let itemLevelTwo = document.createElement("li");
@@ -125,9 +125,8 @@ fetch(iforbetApiUrl)
         categoryNameLevel2 = sortCategoryNamesByLevel(2);
         categoryNameLevel2.forEach(element => {
                 const { categoryName, parentCategory, categoryId, sportId } = element;
-                const event2 = document.querySelector(`ul[data-sport-id='${sportId}']`)
+                const event2 = document.querySelector(`ul[data-category-id='${categoryId}']`)
                 event2.addEventListener('click', (parametr)=>{
-                    console.log(event2)
                     let courses3 = document.querySelectorAll(`ul[data-parent-category='${categoryId}'][data-level = '3']`);
                     courses3.forEach(function(item, index, arr){
                         let checkStyleValue = item.style.display == "block" 
@@ -138,3 +137,4 @@ fetch(iforbetApiUrl)
             })
 })
 //FILTER_WITH_OUT => ELEMENTS WITH-OUT PAR-CHILD
+//FINAL
