@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat+Subrayada:wght@700&family=Russo+One&display=swap');
+body {
+    font-family: Helvetica, sans-serif;
+    background: #23242a;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: whitesmoke;
+    
+}
+
+.dropdown_button {
+    background-color: #181818;
+    color: #33ff33;
+    font-weight: bolder;
+    text-align: center;
+    padding: 16px;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    width: 370px;
+    font-family: 'Russo One', sans-serif;
+    border: 7px solid black;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 30px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 30px;
+    -moz-border-radius-bottomleft: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 0px;
+}
+.dropdown_button:hover{
+    background-color: #33ff33;
+    color: #181818;
+    transition: 0.3s;
+}
+.courses {
+    width: 400px;
+    display: none;
+    position: absolute;
+    background-color: #101010;
+    z-index: 1;
+    border: 8px solid black;
+    margin-top: 10px;
+    cursor: pointer;
+    -webkit-border-top-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 30px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -moz-border-radius-bottomright: 30px;
+    -moz-border-radius-bottomleft: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+    scroll-behavior: smooth;
+}
+
+.courses li {
+    color: whitesmoke;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    list-style: none;
+    background-color:#181818;
+    font-family: 'Russo One', sans-serif;
+    font-size: large;
+    border: 0.335em solid black;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.courses li a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.courses li:hover {
+    background-color:#101010;
+    transition: 0.3s;
+    color: greenyellow;
+    font-family: 'Russo One', sans-serif;
+
+}
+.courses:hover {
+    background-color: #101010;
+}
+.courses2 {
+    display: none;
+    position: relative;
+    background-color: #101010;
+}
+
+.courses2 li {
+    color: whitesmoke;
+    text-decoration: none;
+    display: block;
+    list-style: none;
+    background-color:#181818;
+    font-family: 'Russo One', sans-serif;
+    border-radius: 3px;
+    transition: 0.3s;
+    transition-timing-function: linear;
+}
+
+.courses2 li a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+
+.courses2 li:hover {
+    background-color:#101010;
+    transition: 0.3s;
+    color: orange;
+    font-family: 'Russo One', sans-serif;
+
+}
+.courses2 ul:hover {
+    background-color: #101010;
+}
+.courses3 {
+    display: none;
+    position: relative;
+    background-color: #101010;
+
+}
+
+
+.courses3 li {
+    text-decoration: none;
+    list-style: none;
+    background-color:#101010;
+    font-family: 'Russo One', sans-serif;
+    transition: 0.3s;
+}
+
+.courses3 li a {
+    text-decoration: none;
+}
+
+.courses3 li:hover {
+    background-color:#101010;
+    transition: 0.3s;
+    color: gold;
+    font-family: 'Russo One', sans-serif;
+}
+.dropdownAnimation {
+    animation: growDown 400ms ease-in-out forwards;
+    transform-origin: top center;
+  }
+  @keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
+.hideAnimation {
+    animation: hideDown 600ms ease-in-out forwards;
+    transform-origin: top center;
+}
+@keyframes hideDown {
+    0% {
+        transform: scaleY(1)
+    }
+    50% {
+        transform: scaleY(1)
+    }
+    100% {
+        transform: scaleY(0)
+    }
+}
