@@ -6,6 +6,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     color: whitesmoke;
+    
 }
 
 .dropdown_button {
@@ -67,6 +68,7 @@ body {
     font-size: large;
     border: 0.335em solid black;
     border-radius: 3px;
+    transition: 0.3s;
 }
 
 .courses li a {
@@ -100,15 +102,14 @@ body {
     font-family: 'Russo One', sans-serif;
     border-radius: 3px;
     transition: 0.3s;
+    transition-timing-function: linear;
 }
 
 .courses2 li a {
     text-decoration: none;
     color: whitesmoke;
 }
-.courses2 ul{
-    background-color: #181818;
-}
+
 
 .courses2 li:hover {
     background-color:#101010;
@@ -123,17 +124,15 @@ body {
 .courses3 {
     display: none;
     position: relative;
-    background-color: #181818;
-    margin: 10px;
-    width: 90%;
+    background-color: #101010;
+
 }
 
 
 .courses3 li {
     text-decoration: none;
-    display: block;
     list-style: none;
-    background-color:#181818;
+    background-color:#101010;
     font-family: 'Russo One', sans-serif;
     transition: 0.3s;
 }
@@ -145,8 +144,49 @@ body {
 .courses3 li:hover {
     background-color:#101010;
     transition: 0.3s;
-    color: royalblue;
+    color: gold;
     font-family: 'Russo One', sans-serif;
 }
-
-
+.dropdownAnimation {
+    animation: growDown 400ms ease-in-out forwards;
+    transform-origin: top center;
+  }
+  @keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
+.hideAnimation {
+    animation: hideDown 600ms ease-in-out forwards;
+    transform-origin: top center;
+    transition-duration: 600ms;
+}
+@keyframes hideDown {
+    0% {
+        transform: scaleY(1)
+    }
+    50% {
+        transform: scaleY(1)
+    }
+    100% {
+        transform: scaleY(0)
+    }
+}
+.caret {
+    width: 0;
+    height: 0;
+    padding: 10px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    transition: 0.3s;
+}
+.caret-rotate {
+    transform: rotate(180deg);
+}
