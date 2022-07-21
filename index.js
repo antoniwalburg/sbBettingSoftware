@@ -73,11 +73,11 @@ fetch(iforbetApiUrl)
             const { categoryName, sportId, sportName } = element;
             divone.dataset.sportId = sportId;
             let itemLevelOne = document.createElement("li");
-            let spanCaret = document.createElement("span");
-            spanCaret.setAttribute('class','caret')
-            itemLevelOne.innerText = categoryName + caretString;
+            let caret = document.createElement("span");
+            caret.setAttribute('class','caret')
+            itemLevelOne.innerText = categoryName;
             itemLevelOne.dataset.sportId = sportId
-            itemLevelOne.append(spanCaret)
+            itemLevelOne.append(caret)
             divone.appendChild(itemLevelOne);          
             listLevelOne.appendChild(divone)
 
@@ -88,15 +88,18 @@ fetch(iforbetApiUrl)
             categoryNameLevel2.forEach(element => {
                 const { categoryName, parentCategory, categoryId, sportId, level} = element;
                 let listLevelTwo = document.createElement("ul");
+                let caretNext = document.createElement("span")
+                caretNext.setAttribute('class','caret')
                 listLevelTwo.dataset.sportId = sportId;
                 listLevelTwo.dataset.level = level;
                 listLevelTwo.dataset.categoryId = categoryId;
                 listLevelTwo.setAttribute('class','courses2')
           
                 let itemLevelTwo = document.createElement("li");
-                itemLevelTwo.innerText = categoryName + " »";
+                itemLevelTwo.innerText = categoryName;
                 itemLevelTwo.dataset.categoryId = categoryId
                 itemLevelTwo.dataset.level = level;
+                itemLevelTwo.appendChild(caretNext)
                 listLevelTwo.appendChild(itemLevelTwo);
                 document.querySelector(`[data-sport-id='${parentCategory}'`).appendChild(listLevelTwo)
             });
@@ -106,13 +109,14 @@ fetch(iforbetApiUrl)
 
             const { categoryName, parentCategory, categoryId, sportId, level} = element;
             const event = document.querySelector(`li[data-sport-id='${sportId}']`)
+            const caret = event.querySelector('.caret')
             const timeout = 650;
             event.addEventListener('click', (parametr)=>{
-
+                
+                caret.classList.toggle('caret-rotate');
                 let courses2 = document.querySelectorAll(`ul[data-sport-id='${sportId}'][data-level = '2']`);
                 
                 courses2.forEach(function(item, index, arr){
-
                     if (item.style.display == "block") {
     
                         item.classList.toggle(hideAnimation)
@@ -128,7 +132,7 @@ fetch(iforbetApiUrl)
 
                     } else {
                         item.classList.toggle(dropDownAnimation);
-                        item.style.display = "block";     
+                        item.style.display = "block";
                     }
 
                 })
@@ -145,7 +149,7 @@ fetch(iforbetApiUrl)
             listLevelThree.dataset.categoryId = categoryId;
             listLevelThree.dataset.parentCategory = parentCategory;
             listLevelThree.setAttribute('id', categoryId);
-            listLevelThree.setAttribute('class','courses3');  
+            listLevelThree.setAttribute('class','courses3');
 
             let itemLevelThree = document.createElement("li");
             itemLevelThree.innerText = categoryName;
@@ -159,8 +163,10 @@ fetch(iforbetApiUrl)
 
                 const { categoryName, parentCategory, categoryId, sportId } = element;
                 const event2 = document.querySelector(`li[data-category-id='${categoryId}']`)
+                const caretNext = event2.querySelector('.caret')
                 event2.addEventListener('click', (parametr)=>{
 
+                    caretNext.classList.toggle('caret-rotate');
                     let courses3 = document.querySelectorAll(`ul[data-parent-category='${categoryId}'][data-level = '3']`);
                     const timeout = 650;
                     courses3.forEach(function(item, index, arr){
@@ -188,6 +194,8 @@ fetch(iforbetApiUrl)
                 })
             })
 })
+
 //FILTER_WITH_OUT => ELEMENTS WITH-OUT PAR-CHILD
 //FINAL
 //ERROR ON HIDE-DROP LEVELS1-2 + ERROR ON MULTI CLICK LEVEL 1-3
+//FINAL WITH_OUT => ESPORT(USELESS => 2X CODE)
